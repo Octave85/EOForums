@@ -9,12 +9,13 @@ if (isset($_COOKIE['forum']))
 /*require_once('inc/Authentication.php'); //Authentication class
 require_once('inc/Forum.php'); //Posting/fetching posts class
 require_once('inc/User.php'); //Getting/changing User data class*/
+require_once('inc/pw_config.php'); //db password
 require_once('inc/tpl_sys/Smarty.class.php'); //template system
 require_once('inc/nbbc.php'); //BBCode parser
 require_once('inc/Forum.php');
 
 try {
-	$dbh = new PDO('mysql:host=localhost;dbname=octvc_eoforums', 'octvc_eofuser', 'P*3NCqeva^,F');
+	$dbh = new PDO('mysql:host=localhost;dbname=octvc_eoforums', 'octvc_eofuser', DB_PW);
 } catch (PDOException $e) {
 	die('Database connection error: ' . $e->getMessage());
 }

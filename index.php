@@ -14,6 +14,12 @@ require_once('inc/config.php');
 }*/
 
 $eoforums = new Forum($dbh, $tpl);
-$eoforums->push('index.tpl', array("forums" => $eoforums->fetch_all_forums()));
+
+$forumData = $eoforums->fetch_all_forums();
+$pForumData = array(
+	"cats" => $forumData[0],
+	"forums" => $forumData[1]
+);
+$eoforums->push('index.tpl', $pForumData);
 
 ?>

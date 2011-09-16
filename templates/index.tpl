@@ -39,63 +39,28 @@
 		<span class="close">Close</span>
 		<p>Hey there! If this is your first visit, be sure to check out the <a href="#">FAQ</a>. You are required to <a href="#">Register</a> before you can post. Dive right into the community below - discussion is categorized into forums and subforums; find a topic you're interested in and get posting!</p>
 	</div>
+	{$firstCat = 1}
+	{foreach $cats as $cat}
 	
-	{foreach $forum in $forums}
-
-	{if $forum.forumtype eq 1}
-	<div class="listheader">
-		<h2>{$forum.0.forumname}</h2>
-		<a href="#toggle" class="toggle">Toggle</a>
-	</div>
-	{/if}
-
-	{if $forum.forumtype eq 0 && $forum.parentid eq ???}
-		
-	<table class="forumlist" cellspacing="0" border="0">
-		<tr>
-			<td class="icon"><img src="images/subforum.png" alt="subforum" /></td>
-			<td class="info"><h3><a href="#">{$forums.1.forumname}</a></h3><div class="meta">{$forums.1.forumdescription}</div></td>
-			<td class="lastpost"><a href="#">The Boner-Shrinking Thread -...</a><br/><span>by <a href="#">glassy</a> 1 Minutes Ago</span></td>
-			<td class="threads">24,492</td>
-			<td class="posts">1,978,499</td>
-		</tr>
-		<tr>
-			<td class="icon"><img src="images/subforum.png" alt="subforum" /></td>
-			<td class="info"><h3><a href="#">Film and Television</a></h3><div class="meta">Discuss your favorite movies and TV shows</div></td>
-			<td class="lastpost"><a href="#">Doctor Who V4 - Hello Sweetie...</a><br/><span>by <a href="#">DainBramageStudios</a> 2 Minutes Ago</span></td>
-			<td class="threads">1,917</td>
-			<td class="posts">117,231</td>
-		</tr>
-		<tr>
-			<td class="icon"><img src="images/subforum.png" alt="subforum" /></td>
-			<td class="info"><h3><a href="#">Hardware and Software</a></h3><div class="meta">A forum dedicated to hardware and software, gadgets and gizmos.
-				<ol class="subforums"><li><a href="#">Technical Support</a></li><li><a href="#">Programming</a></li><li><a href="#">Windows</a></li><li><a href="#">Web Development</a></li><li><a href="#">Linux</a> </li><li><a href="#">Apple</a></li><li><a href="#">PC Building</a></li></ol></div></td>
-			<td class="lastpost"><a href="#">Post Your Desktop v7</a><br/><span>by <a href="#">BreenIsALie</a> 7 Minutes Ago</span></td>
-			<td class="threads">26,433</td>
-			<td class="posts">525,597</td>
-		</tr>
-		<tr>
-			<td class="icon"><img src="images/subforum.png" alt="subforum" /></td>
-			<td class="info"><h3><a href="#">Fast Threads</a></h3><div class="meta">This is for your "Post Your" and "Question" threads.</div></td>
-			<td class="lastpost"><a href="#">The Gift Giving Thread, Early...</a><br/><span>by <a href="#">Fusilero1</a> 1 Minutes Ago</span></td>
-			<td class="threads">22,891</td>
-			<td class="posts">1,805,659</td>
-		</tr>
-	</table>
-	<div class="listheader middle">
-		<h2>Games</h2>
+	<div class="{if $firstCat eq 1}listheader{else}listheader middle{/if}">
+		<h2>{$cat.forumname}</h2>
 		<a href="#toggle" class="toggle">Toggle</a>
 	</div>
 	<table class="forumlist" cellspacing="0" border="0">
+	{$firstCat = 0}
+	{foreach $cat.children as $child}	
 		<tr>
 			<td class="icon"><img src="images/subforum.png" alt="subforum" /></td>
-			<td class="info"><h3><a href="#">General Games Discussion</a></h3><div class="meta">I bet you can't guess what you're meant to talk about in here.
-				<ol class="subforums"><li><a href="#">Games In Progress</a></li></ol></div></td>
-			<td class="lastpost"><a href="#">World of Tanks V4 - World of...</a><br/><span>by <a href="#">Awesomecaek</a> 2 Minutes Ago</span></td>
-			<td class="threads">11,638</td>
-			<td class="posts">1,075,047</td>
+			<td class="info"><h3><a href="#">{$forums.$child.forumname}</a></h3><div class="meta">{$forums.$child.forumdescription}</div></td>
+			<td class="lastpost"><a href="#">{$forums.$child.lastposttitle}</a><br/><span>by <a href="#">{$forums.$child.lastposterusername}</a> 1 Minutes Ago</span></td>
+			<td class="threads">{$forums.$child.threads}</td>
+			<td class="posts">{$forums.$child.posts}</td>
 		</tr>
+	
+
+	{/foreach}
 	</table>
+{/foreach}	
 	<div class="listfooter">
 		&nbsp;
 	</div>
