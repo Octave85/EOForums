@@ -10,7 +10,7 @@
 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 
-	<title>ValoBB Threadlist</title>
+	<title>{$forumname}</title>
 </head>
 <body>
 <div id="container">
@@ -34,7 +34,27 @@
 			<li class="more"><a href="#">More</a></li>
 		</ul>
 	</div>
+	{foreach $subforums as $subforum}
+	{if $subforum@first}
 	<div class="listheader">
+		<h2>Sub-Forums</h2>
+	</div>
+	<table class="forumlist" cellspacing="0" border="0" valign="top">
+	{/if}
+		<tr>
+			<td class="icon"><img src="images/subforum.png" alt="subforum"></td>
+			<td class="info"><h3><a href="forumdisplay?fid={$subforum.fid}">{$subforum.forumname}</a></h3><div class="meta">{$subforum.forumdescription}</div></td>
+			<td class="lastpost"><a href="/posts/{$subforum.lastpostpid}">{$subforum.lastposttitle}</a><br/><span>by <a href="#">{$subforum.lastposterusername}</a> {$subforum.lastpost}</span></td>
+			<td class="threads"><a href="#">{$subforum.forumthreads}</a></td>
+			<td class="posts"><a href="#">{$subforum.forumposts}</a></td>
+		</tr>
+	{if $subforum@last}
+	</table>
+	<div class="listheader middle">
+	{/if}
+	{foreachelse}
+	<div class="listheader">
+	{/foreach}
 		<a class="button" href="#">New Thread</a>
 		<a class="button" href="#">Subscribe</a>
 		<div class="pagination">
