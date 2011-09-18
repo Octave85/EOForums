@@ -1,5 +1,6 @@
 <?php
 error_reporting(E_ALL);
+define('INC', 1);
 
 require_once('inc/config.php');
 
@@ -13,13 +14,13 @@ require_once('inc/config.php');
 	die();
 }*/
 
-$eoforums = new Forum($dbh, $tpl);
+$board = new Index($dbh, $tpl);
 
-$forumData = $eoforums->fetch_all_forums();
+$forumData = $board->fetch_all_forums();
 $pForumData = array(
 	"cats" => $forumData[0],
 	"forums" => $forumData[1]
 );
-$eoforums->push('index.tpl', $pForumData);
+$board->push('index.tpl', $pForumData);
 
 ?>

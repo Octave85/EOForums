@@ -12,7 +12,7 @@ class Thread_list extends EOForum {
 
 		switch ($mode) {
 			case 'thread_list':
-				$sql = 'SELECT * FROM threads WHERE fid = :fid ORDER BY lastpost DESC LIMIT :perpage';
+				$sql = 'SELECT * FROM threads WHERE ftid = :fid ORDER BY lastpost DESC LIMIT :perpage';
 				$tl_query = $this->dbh->prepare($sql);
 				$tl_query->bindParam(':fid', $params['fid'], PDO::PARAM_INT);
 				$tl_query->bindParam(':perpage', $params['perpage'], PDO::PARAM_INT);

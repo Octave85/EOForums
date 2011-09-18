@@ -15,12 +15,12 @@
 <body>
 <div id="container">
 	<div id="header">
-		<h1>Forum Header</h1>
+		<h1>{$forumname}</h1>
 		<ul class="breadcrumbs">
-			<li><a href="#">Home</a></li> > 
-			<li><a href="#">Forum</a></li> > 
-			<li><a href="#">Facepunch</a></li> > 
-			<li><a href="#">Hardware and Software</a></li>
+			<li><a href="./">Home</a></li> >
+			{foreach $navbits as $navbit}
+			<li><a href="forumdisplay.php?fid={$navbit@key}">{$navbit}</a></li>{if $navbit@last}{else} >{/if} 
+			{/foreach}
 		</ul>
 		<a class="username" href="#">Username</a>
 		<div class="controls">

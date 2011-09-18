@@ -11,17 +11,14 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 	<script type="text/javascript" src="js/valobb.js"></script>
 
-	<title>ValoBB Index</title>
+	<title>EOForums Index</title>
 </head>
 <body>
 <div id="container">
 	<div id="header">
-		<h1>Forum Header</h1>
+		<h1>EOForums</h1>
 		<ul class="breadcrumbs">
-			<li><a href="#">Home</a> > </li>
-			<li><a href="#">Forum</a> > </li>
-			<li><a href="#">Facepunch</a> > </li>
-			<li><a href="#">Hardware and Software</a></li>
+			<li><a href="/">Home</a></li>
 		</ul>
 		<a class="username" href="#">Username</a>
 		<div class="controls">
@@ -51,10 +48,19 @@
 	{foreach $cat.children as $child}	
 		<tr>
 			<td class="icon"><img src="images/subforum.png" alt="subforum" /></td>
-			<td class="info"><h3><a href="#">{$forums.$child.forumname}</a></h3><div class="meta">{$forums.$child.forumdescription}</div></td>
+			<td class="info"><h3><a href="forumdisplay.php?fid={$forums.$child.fid}">{$forums.$child.forumname}</a></h3><div class="meta">{$forums.$child.forumdescription}
+
+			{if $forums.$child.haschildren eq 1}
+			<ol class="subforums">
+				{foreach $forums.$child.children as $index => $subforum}
+				<li><a href="forumdisplay.php?fid={$forums.$subforum.fid}">{$forums.$subforum.forumname}</a></li>
+				{/foreach}
+			</ol>
+			{/if}
+			</div></td>
 			<td class="lastpost"><a href="#">{$forums.$child.lastposttitle}</a><br/><span>by <a href="#">{$forums.$child.lastposterusername}</a> 1 Minutes Ago</span></td>
-			<td class="threads">{$forums.$child.threads}</td>
-			<td class="posts">{$forums.$child.posts}</td>
+			<td class="threads">{$forums.$child.forumthreads}</td>
+			<td class="posts">{$forums.$child.forumposts}</td>
 		</tr>
 	
 

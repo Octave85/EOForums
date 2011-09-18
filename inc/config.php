@@ -1,4 +1,7 @@
 <?php
+if ( ! INC)
+	die();
+
 session_set_cookie_params(31556926); //1 year
 session_name('forum');
 session_start();
@@ -9,10 +12,7 @@ if (isset($_COOKIE['forum']))
 /*require_once('inc/Authentication.php'); //Authentication class
 require_once('inc/Forum.php'); //Posting/fetching posts class
 require_once('inc/User.php'); //Getting/changing User data class*/
-require_once('inc/pw_config.php'); //db password
-require_once('inc/tpl_sys/Smarty.class.php'); //template system
-require_once('inc/nbbc.php'); //BBCode parser
-require_once('inc/Forum.php');
+require_once('inc/requires.php');
 
 try {
 	$dbh = new PDO('mysql:host=localhost;dbname=octvc_eoforums', 'octvc_eofuser', DB_PW);
@@ -58,8 +58,10 @@ function UnixTime($mysql_timestamp) {
 	return $unix_time;
 }
 
+
+
 function timeSincePost($l) { 
-	$l = time() - strtotime($l);
+	$l = time() - $l;
 	$y = array(31536000=>'Year', 
 			2592000=>'Month',
 			604800=>'Week',
